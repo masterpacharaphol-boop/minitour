@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangkok One Day Tour | Cinematic Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --accent: #d4af37;
+            --card-bg: #141414;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Prompt', 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.4), var(--bg-color)), 
+                        url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #222;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            min-height: 60px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
+            padding: 8px 18px;
+            border-radius: 4px;
+        }
+
+        .btn-outline {
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+        }
+
+        .btn-solid {
+            background: var(--accent);
+            color: var(--bg-color);
+            padding: 12px 28px;
+            font-size: 0.95rem;
+        }
+
+        .btn-solid:hover {
+            background: #f1c40f;
+        }
+
+        .map-section {
+            margin-top: 4rem;
+            padding-bottom: 4rem;
+            text-align: center;
+        }
+
+        .map-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .map-container {
+            width: 100%;
+            max-width: 1100px;
+            height: 500px;
+            margin: 0 auto 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>BANGKOK</h1>
+        <p>Mini Tour Trip One Day</p>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            {% for loc in locations %}
+            <div class="card">
+                <img src="{{ loc.img }}" alt="{{ loc.name }}" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">{{ loc.name }}</h3>
+                    <p class="card-desc">{{ loc.desc }}</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination={{ loc.lat }},{{ loc.lng }}" 
+                       target="_blank" 
+                       class="btn btn-outline">
+                       ข้อมูลเส้นทาง
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="map-section">
+        <h2>EXPLORE THE ROUTE</h2>
+        <div class="map-container">
+            <!-- ดึงแผนที่จาก /map มาแสดงแบบเสถียร 100% -->
+            <iframe src="/map" class="map-iframe"></iframe>
+        </div>
+        
+        <a href="https://www.google.com/maps/dir/อุทยาน+100+ปี+จุฬาฯ/อนุสาวรีย์ชัยสมรภูมิ/หอพระสุราลัยพิมาน/สวนลุมพินี/ไอคอนสยาม" 
+           target="_blank" 
+           class="btn btn-solid">
+           EXPLORE ROUTE ON MAPS
+        </a>
+    </div>
+
+</body>
+</html>
